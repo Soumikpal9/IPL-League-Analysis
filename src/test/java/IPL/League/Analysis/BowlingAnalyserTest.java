@@ -75,4 +75,14 @@ public class BowlingAnalyserTest {
     	}
     	catch(LeagueException e) {}
     }
+    
+    @Test
+    public void givenBowlingData_ShouldReturnBowlingAverageTopStrikeRate() throws LeagueException, CSVException {
+    	try {
+    		String sortedBowlingData = bowlingAnalyser.getStrikeRateWiseBowlingAverageSortedData(Paths.get(LEAGUE_BOWLING_DATA));
+    		LeagueBatting[] bowlingList = new Gson().fromJson(sortedBowlingData, LeagueBatting[].class);
+    		Assert.assertEquals("Krishnappa Gowtham", bowlingList[0].player);
+    	}
+    	catch(LeagueException e) {}
+    }
 }
