@@ -46,7 +46,7 @@ public class BattingAnalyserTest {
     @Test
     public void givenBattingData_ShouldReturnTopStrikeRates() throws LeagueException, CSVException {
     	try {
-    		String sortedBattingData = battingAnalyser.getBattingAvgWiseSortedData(Paths.get(LEAGUE_BATTING_DATA));
+    		String sortedBattingData = battingAnalyser.getStrikeRateWiseSortedData(Paths.get(LEAGUE_BATTING_DATA));
     		LeagueBatting[] battingList = new Gson().fromJson(sortedBattingData, LeagueBatting[].class);
     		Assert.assertEquals("Ishant Sharma", battingList[0].player);
     	}
