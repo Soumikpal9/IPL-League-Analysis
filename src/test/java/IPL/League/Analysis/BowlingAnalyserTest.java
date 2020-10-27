@@ -29,7 +29,17 @@ public class BowlingAnalyserTest {
     @Test
     public void givenBowlingData_ShouldReturnTopBowlingAverages() throws LeagueException, CSVException {
     	try {
-    		String sortedBowlingData = bowlingAnalyser.getBattingAvgWiseSortedData(Paths.get(LEAGUE_BOWLING_DATA));
+    		String sortedBowlingData = bowlingAnalyser.getBowlingAvgWiseSortedData(Paths.get(LEAGUE_BOWLING_DATA));
+    		LeagueBatting[] bowlingList = new Gson().fromJson(sortedBowlingData, LeagueBatting[].class);
+    		Assert.assertEquals("Krishnappa Gowtham", bowlingList[0].player);
+    	}
+    	catch(LeagueException e) {}
+    }
+    
+    @Test
+    public void givenBowlingData_ShouldReturnTopStrikeRates() throws LeagueException, CSVException {
+    	try {
+    		String sortedBowlingData = bowlingAnalyser.getStrikeRateWiseSortedData(Paths.get(LEAGUE_BOWLING_DATA));
     		LeagueBatting[] bowlingList = new Gson().fromJson(sortedBowlingData, LeagueBatting[].class);
     		Assert.assertEquals("Krishnappa Gowtham", bowlingList[0].player);
     	}
