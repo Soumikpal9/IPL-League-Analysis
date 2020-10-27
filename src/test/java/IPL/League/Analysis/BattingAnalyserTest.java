@@ -46,7 +46,7 @@ public class BattingAnalyserTest {
     @Test
     public void givenBattingData_ShouldReturnTopStrikeRates() throws LeagueException, CSVException {
     	try {
-    		String sortedBattingData = battingAnalyser.getBattingAvgWiseSortedData(Paths.get(LEAGUE_BATTING_DATA));
+    		String sortedBattingData = battingAnalyser.getStrikeRateWiseSortedData(Paths.get(LEAGUE_BATTING_DATA));
     		LeagueBatting[] battingList = new Gson().fromJson(sortedBattingData, LeagueBatting[].class);
     		Assert.assertEquals("Ishant Sharma", battingList[0].player);
     	}
@@ -56,7 +56,7 @@ public class BattingAnalyserTest {
     @Test
     public void givenBattingData_ShouldReturnTopSixes() throws LeagueException, CSVException {
     	try {
-    		String sortedBattingData = battingAnalyser.getBattingAvgWiseSortedData(Paths.get(LEAGUE_BATTING_DATA));
+    		String sortedBattingData = battingAnalyser.getHighestSixWiseSortedData(Paths.get(LEAGUE_BATTING_DATA));
     		LeagueBatting[] battingList = new Gson().fromJson(sortedBattingData, LeagueBatting[].class);
     		Assert.assertEquals("Andre Russell", battingList[0].player);
     	}
@@ -64,9 +64,29 @@ public class BattingAnalyserTest {
     }
     
     @Test
-    public void givenBattingData_ShouldReturnTopStrikeFours() throws LeagueException, CSVException {
+    public void givenBattingData_ShouldReturnTopFours() throws LeagueException, CSVException {
     	try {
-    		String sortedBattingData = battingAnalyser.getBattingAvgWiseSortedData(Paths.get(LEAGUE_BATTING_DATA));
+    		String sortedBattingData = battingAnalyser.getHighestFourWiseSortedData(Paths.get(LEAGUE_BATTING_DATA));
+    		LeagueBatting[] battingList = new Gson().fromJson(sortedBattingData, LeagueBatting[].class);
+    		Assert.assertEquals("Shikhar Dhawan", battingList[0].player);
+    	}
+    	catch(LeagueException e) {}
+    }
+    
+    @Test
+    public void givenBattingData_ShouldReturnHighestStrikeRateTopSixes() throws LeagueException, CSVException {
+    	try {
+    		String sortedBattingData = battingAnalyser.getHighestSixWiseStrikeRateSortedData(Paths.get(LEAGUE_BATTING_DATA));
+    		LeagueBatting[] battingList = new Gson().fromJson(sortedBattingData, LeagueBatting[].class);
+    		Assert.assertEquals("Andre Russell", battingList[0].player);
+    	}
+    	catch(LeagueException e) {}
+    }
+    
+    @Test
+    public void givenBattingData_ShouldReturnHighestStrikeRateTopFours() throws LeagueException, CSVException {
+    	try {
+    		String sortedBattingData = battingAnalyser.getHighestFourWiseStrikeRateSortedData(Paths.get(LEAGUE_BATTING_DATA));
     		LeagueBatting[] battingList = new Gson().fromJson(sortedBattingData, LeagueBatting[].class);
     		Assert.assertEquals("Shikhar Dhawan", battingList[0].player);
     	}
