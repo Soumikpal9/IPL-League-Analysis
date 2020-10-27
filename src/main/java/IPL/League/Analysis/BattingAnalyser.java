@@ -218,11 +218,11 @@ public class BattingAnalyser {
 	private void sortDesc(List<LeagueBatting> battingList, Comparator<LeagueBatting> battingComparator) {
 		for(int i = 0; i < battingList.size() - 1; i++) {
 			for(int j = 0; j < battingList.size() -1 - i; j++) {
-				LeagueBatting census1 = battingList.get(j);
-				LeagueBatting census2 = battingList.get(j+1);
-				if(battingComparator.compare(census1, census2) < 0) {
-					battingList.set(j,  census2);
-					battingList.set(j+1, census1);
+				LeagueBatting c1 = battingList.get(j);
+				LeagueBatting c2 = battingList.get(j+1);
+				if(battingComparator.compare(c1, c2) < 0) {
+					battingList.set(j,  c2);
+					battingList.set(j+1, c1);
 				}
 			}
 		}
