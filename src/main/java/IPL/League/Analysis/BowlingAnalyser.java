@@ -31,13 +31,35 @@ public class BowlingAnalyser {
 		}
     }
     
-    public String getBattingAvgWiseSortedData(Path path) throws LeagueException, CSVException{
+    public String getBowlingAvgWiseSortedData(Path path) throws LeagueException, CSVException{
     	try(Reader reader = Files.newBufferedReader(path)){
     		List<LeagueBowling> bowlingList = csvBuilder.getCSVFileList(reader, LeagueBowling.class);
     		if(bowlingList == null || bowlingList.size() == 0) {
     			throw new LeagueException("No data present", LeagueException.ExceptionType.NO_LEAGUE_DATA);
     		}
     		Comparator<LeagueBowling> bowlingComparator = Comparator.comparing(bowling -> bowling.average);
+    		this.sortDesc(bowlingList, bowlingComparator);
+    		String sortedBowlingData = new Gson().toJson(bowlingList);
+    		return sortedBowlingData;
+    	}
+    	catch(IOException e) {
+			throw new LeagueException("File not found", LeagueException.ExceptionType.WRONG_CSV); 
+		}
+		catch(RuntimeException e) {
+			throw new LeagueException("File internal data not valid", LeagueException.ExceptionType.WRONG_HEADER);
+		}
+		catch(CSVException e) {
+			throw new LeagueException("Unable to parse", LeagueException.ExceptionType.UNABLE_TO_PARSE);
+		}
+    }
+    
+    public String getStrikeRateWiseSortedData(Path path) throws LeagueException, CSVException{
+    	try(Reader reader = Files.newBufferedReader(path)){
+    		List<LeagueBowling> bowlingList = csvBuilder.getCSVFileList(reader, LeagueBowling.class);
+    		if(bowlingList == null || bowlingList.size() == 0) {
+    			throw new LeagueException("No data present", LeagueException.ExceptionType.NO_LEAGUE_DATA);
+    		}
+    		Comparator<LeagueBowling> bowlingComparator = Comparator.comparing(bowling -> bowling.strikeRate);
     		this.sortDesc(bowlingList, bowlingComparator);
     		String sortedBowlingData = new Gson().toJson(bowlingList);
     		return sortedBowlingData;
