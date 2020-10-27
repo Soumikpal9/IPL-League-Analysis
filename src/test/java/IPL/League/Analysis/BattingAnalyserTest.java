@@ -112,4 +112,14 @@ public class BattingAnalyserTest {
     	}
     	catch(LeagueException e) {}
     }
+    
+    @Test
+    public void givenBattingData_ShouldReturnMaxCenturiesAndBattingAverages() throws LeagueException, CSVException {
+    	try {
+    		String sortedBattingData = battingAnalyser.getBattingAvgAndMaxHundredsWiseSortedData(Paths.get(LEAGUE_BATTING_DATA));
+    		LeagueBatting[] battingList = new Gson().fromJson(sortedBattingData, LeagueBatting[].class);
+    		Assert.assertEquals("David Warner", battingList[0].player);
+    	}
+    	catch(LeagueException e) {}
+    }
 }
