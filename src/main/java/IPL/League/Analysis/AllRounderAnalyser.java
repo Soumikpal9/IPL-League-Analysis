@@ -27,12 +27,26 @@ public class AllRounderAnalyser {
 		return allRounderList;
 	}
 	
-	public List<LeagueAllRounder> getattingAndBowlingAvgWiseSortedData(List<LeagueAllRounder> allRounder1List) throws LeagueException, CSVException {
+	public List<LeagueAllRounder> getBattingAndBowlingAvgWiseSortedData(List<LeagueAllRounder> allRounder1List) throws LeagueException, CSVException {
     	try{
     		if(allRounderList == null || allRounderList.size() == 0) {
     			throw new LeagueException("No data present", LeagueException.ExceptionType.NO_LEAGUE_DATA);
     		}
     		Comparator<LeagueAllRounder> allRounderComparator = Comparator.comparing(player -> player.avgRuns + player.avgWickets);
+    		this.sortDesc(allRounder1List, allRounderComparator);
+    		return allRounder1List;
+    	}
+    	catch(RuntimeException e) {
+			throw new LeagueException("File internal data not valid", LeagueException.ExceptionType.WRONG_HEADER);
+		}
+    }
+	
+	public List<LeagueAllRounder> getRunsAndWicketsWiseSortedData(List<LeagueAllRounder> allRounder1List) throws LeagueException, CSVException {
+    	try{
+    		if(allRounderList == null || allRounderList.size() == 0) {
+    			throw new LeagueException("No data present", LeagueException.ExceptionType.NO_LEAGUE_DATA);
+    		}
+    		Comparator<LeagueAllRounder> allRounderComparator = Comparator.comparing(player -> player.runs + player.wickets);
     		this.sortDesc(allRounder1List, allRounderComparator);
     		return allRounder1List;
     	}

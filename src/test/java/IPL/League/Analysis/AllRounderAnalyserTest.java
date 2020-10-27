@@ -37,8 +37,17 @@ public class AllRounderAnalyserTest {
     @Test
     public void givenAllRounderData_ShouldReturnTopBattingAndBowlingAverages() throws LeagueException, CSVException, IOException {
     	try {
-    		List<LeagueAllRounder> sortedAllRounderList = allRounderAnalyser.getattingAndBowlingAvgWiseSortedData(allRounderList);
+    		List<LeagueAllRounder> sortedAllRounderList = allRounderAnalyser.getBattingAndBowlingAvgWiseSortedData(allRounderList);
     		Assert.assertEquals("Harpreet Brar", sortedAllRounderList.get(0).player);
+    	}
+    	catch(LeagueException e) {}
+    }
+    
+    @Test
+    public void givenAllRounderData_ShouldReturnTopRunsAndWickets() throws LeagueException, CSVException, IOException {
+    	try {
+    		List<LeagueAllRounder> sortedAllRounderList = allRounderAnalyser.getRunsAndWicketsWiseSortedData(allRounderList);
+    		Assert.assertEquals("Andre Russell", sortedAllRounderList.get(99).player);
     	}
     	catch(LeagueException e) {}
     }
