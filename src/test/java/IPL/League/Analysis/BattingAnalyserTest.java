@@ -92,4 +92,14 @@ public class BattingAnalyserTest {
     	}
     	catch(LeagueException e) {}
     }
+    
+    @Test
+    public void givenBattingData_ShouldReturnBattingAveragesTopStrikeRates() throws LeagueException, CSVException {
+    	try {
+    		String sortedBattingData = battingAnalyser.getStrikeRateWiseBattingAverageSortedData(Paths.get(LEAGUE_BATTING_DATA));
+    		LeagueBatting[] battingList = new Gson().fromJson(sortedBattingData, LeagueBatting[].class);
+    		Assert.assertEquals("MS Dhoni", battingList[0].player);
+    	}
+    	catch(LeagueException e) {}
+    }
 }
