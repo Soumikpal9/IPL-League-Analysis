@@ -27,15 +27,14 @@ public class AllRounderAnalyser {
 		return allRounderList;
 	}
 	
-	public String getattingAndBowlingAvgWiseSortedData(List<LeagueAllRounder> allRounderList) throws LeagueException, CSVException {
+	public List<LeagueAllRounder> getattingAndBowlingAvgWiseSortedData(List<LeagueAllRounder> allRounder1List) throws LeagueException, CSVException {
     	try{
     		if(allRounderList == null || allRounderList.size() == 0) {
     			throw new LeagueException("No data present", LeagueException.ExceptionType.NO_LEAGUE_DATA);
     		}
     		Comparator<LeagueAllRounder> allRounderComparator = Comparator.comparing(player -> player.avgRuns + player.avgWickets);
-    		this.sortDesc(allRounderList, allRounderComparator);
-    		String sortedAllRounderData = new Gson().toJson(allRounderList);
-    		return sortedAllRounderData;
+    		this.sortDesc(allRounder1List, allRounderComparator);
+    		return allRounder1List;
     	}
     	catch(RuntimeException e) {
 			throw new LeagueException("File internal data not valid", LeagueException.ExceptionType.WRONG_HEADER);
@@ -45,11 +44,11 @@ public class AllRounderAnalyser {
 	private void sortDesc(List<LeagueAllRounder> allRounderList, Comparator<LeagueAllRounder> allRounderComparator) {
 		for(int i = 0; i < allRounderList.size() - 1; i++) {
 			for(int j = 0; j < allRounderList.size() -1 - i; j++) {
-				LeagueAllRounder census1 = allRounderList.get(j);
-				LeagueAllRounder census2 = allRounderList.get(j+1);
-				if(allRounderComparator.compare(census1, census2) < 0) {
-					allRounderList.set(j,  census2);
-					allRounderList.set(j+1, census1);
+				LeagueAllRounder c1 = allRounderList.get(j);
+				LeagueAllRounder c2 = allRounderList.get(j+1);
+				if(allRounderComparator.compare(c1, c2) < 0) {
+					allRounderList.set(j,  c2);
+					allRounderList.set(j+1, c1);
 				}
 			}
 		}

@@ -192,11 +192,11 @@ public class BowlingAnalyser {
     private void sortDesc(List<LeagueBowling> bowlingList, Comparator<LeagueBowling> bowlingComparator) {
 		for(int i = 0; i < bowlingList.size() - 1; i++) {
 			for(int j = 0; j < bowlingList.size() -1 - i; j++) {
-				LeagueBowling census1 = bowlingList.get(j);
-				LeagueBowling census2 = bowlingList.get(j+1);
-				if(bowlingComparator.compare(census1, census2) < 0) {
-					bowlingList.set(j,  census2);
-					bowlingList.set(j+1, census1);
+				LeagueBowling c1 = bowlingList.get(j);
+				LeagueBowling c2 = bowlingList.get(j+1);
+				if(bowlingComparator.compare(c1, c2) < 0) {
+					bowlingList.set(j,  c2);
+					bowlingList.set(j+1, c1);
 				}
 			}
 		}
