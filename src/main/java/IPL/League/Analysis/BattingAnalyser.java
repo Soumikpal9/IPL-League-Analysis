@@ -109,7 +109,7 @@ public class BattingAnalyser {
     		}
     		Comparator<LeagueBatting> battingComparator = Comparator.comparing(batting -> batting.noOfSixes);
     		Comparator<LeagueBatting> battingComp = battingComparator.thenComparing(batting -> batting.strikeRate);
-    		this.sortDesc(battingList, battingComparator);
+    		this.sortDesc(battingList, battingComp);
     		String sortedBattingData = new Gson().toJson(battingList);
     		return sortedBattingData;
     	}
@@ -154,7 +154,7 @@ public class BattingAnalyser {
     		}
     		Comparator<LeagueBatting> battingComparator = Comparator.comparing(batting -> batting.noOfFours);
     		Comparator<LeagueBatting> battingComp = battingComparator.thenComparing(batting -> batting.strikeRate);
-    		this.sortDesc(battingList, battingComparator);
+    		this.sortDesc(battingList, battingComp);
     		String sortedBattingData = new Gson().toJson(battingList);
     		return sortedBattingData;
     	}
