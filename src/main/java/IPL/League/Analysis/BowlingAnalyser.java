@@ -75,6 +75,28 @@ public class BowlingAnalyser {
 		}
     }
     
+    public String getEconomyWiseSortedData(Path path) throws LeagueException, CSVException{
+    	try(Reader reader = Files.newBufferedReader(path)){
+    		List<LeagueBowling> bowlingList = csvBuilder.getCSVFileList(reader, LeagueBowling.class);
+    		if(bowlingList == null || bowlingList.size() == 0) {
+    			throw new LeagueException("No data present", LeagueException.ExceptionType.NO_LEAGUE_DATA);
+    		}
+    		Comparator<LeagueBowling> bowlingComparator = Comparator.comparing(bowling -> bowling.economy);
+    		this.sortDesc(bowlingList, bowlingComparator);
+    		String sortedBowlingData = new Gson().toJson(bowlingList);
+    		return sortedBowlingData;
+    	}
+    	catch(IOException e) {
+			throw new LeagueException("File not found", LeagueException.ExceptionType.WRONG_CSV); 
+		}
+		catch(RuntimeException e) {
+			throw new LeagueException("File internal data not valid", LeagueException.ExceptionType.WRONG_HEADER);
+		}
+		catch(CSVException e) {
+			throw new LeagueException("Unable to parse", LeagueException.ExceptionType.UNABLE_TO_PARSE);
+		}
+    }
+    
     private void sortDesc(List<LeagueBowling> bowlingList, Comparator<LeagueBowling> bowlingComparator) {
 		for(int i = 0; i < bowlingList.size() - 1; i++) {
 			for(int j = 0; j < bowlingList.size() -1 - i; j++) {
