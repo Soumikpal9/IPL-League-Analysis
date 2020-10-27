@@ -101,6 +101,29 @@ public class BattingAnalyser {
 		}
     }
     
+    public String getHighestSixWiseStrikeRateSortedData(Path path) throws LeagueException, CSVException{
+    	try(Reader reader = Files.newBufferedReader(path)){
+    		List<LeagueBatting> battingList = csvBuilder.getCSVFileList(reader, LeagueBatting.class);
+    		if(battingList == null || battingList.size() == 0) {
+    			throw new LeagueException("No data present", LeagueException.ExceptionType.NO_LEAGUE_DATA);
+    		}
+    		Comparator<LeagueBatting> battingComparator = Comparator.comparing(batting -> batting.noOfSixes);
+    		Comparator<LeagueBatting> battingComp = battingComparator.thenComparing(batting -> batting.strikeRate);
+    		this.sortDesc(battingList, battingComp);
+    		String sortedBattingData = new Gson().toJson(battingList);
+    		return sortedBattingData;
+    	}
+    	catch(IOException e) {
+			throw new LeagueException("File not found", LeagueException.ExceptionType.WRONG_CSV); 
+		}
+		catch(RuntimeException e) {
+			throw new LeagueException("File internal data not valid", LeagueException.ExceptionType.WRONG_HEADER);
+		}
+		catch(CSVException e) {
+			throw new LeagueException("Unable to parse", LeagueException.ExceptionType.UNABLE_TO_PARSE);
+		}
+    }
+    
     public String getHighestFourWiseSortedData(Path path) throws LeagueException, CSVException{
     	try(Reader reader = Files.newBufferedReader(path)){
     		List<LeagueBatting> battingList = csvBuilder.getCSVFileList(reader, LeagueBatting.class);
@@ -109,6 +132,29 @@ public class BattingAnalyser {
     		}
     		Comparator<LeagueBatting> battingComparator = Comparator.comparing(batting -> batting.noOfFours);
     		this.sortDesc(battingList, battingComparator);
+    		String sortedBattingData = new Gson().toJson(battingList);
+    		return sortedBattingData;
+    	}
+    	catch(IOException e) {
+			throw new LeagueException("File not found", LeagueException.ExceptionType.WRONG_CSV); 
+		}
+		catch(RuntimeException e) {
+			throw new LeagueException("File internal data not valid", LeagueException.ExceptionType.WRONG_HEADER);
+		}
+		catch(CSVException e) {
+			throw new LeagueException("Unable to parse", LeagueException.ExceptionType.UNABLE_TO_PARSE);
+		}
+    }
+    
+    public String getHighestFourWiseStrikeRateSortedData(Path path) throws LeagueException, CSVException{
+    	try(Reader reader = Files.newBufferedReader(path)){
+    		List<LeagueBatting> battingList = csvBuilder.getCSVFileList(reader, LeagueBatting.class);
+    		if(battingList == null || battingList.size() == 0) {
+    			throw new LeagueException("No data present", LeagueException.ExceptionType.NO_LEAGUE_DATA);
+    		}
+    		Comparator<LeagueBatting> battingComparator = Comparator.comparing(batting -> batting.noOfFours);
+    		Comparator<LeagueBatting> battingComp = battingComparator.thenComparing(batting -> batting.strikeRate);
+    		this.sortDesc(battingList, battingComp);
     		String sortedBattingData = new Gson().toJson(battingList);
     		return sortedBattingData;
     	}
