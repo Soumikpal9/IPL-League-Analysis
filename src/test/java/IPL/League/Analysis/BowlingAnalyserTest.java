@@ -85,4 +85,14 @@ public class BowlingAnalyserTest {
     	}
     	catch(LeagueException e) {}
     }
+    
+    @Test
+    public void givenBowlingData_ShouldReturnMaxWicketsTopBowlingAverage() throws LeagueException, CSVException {
+    	try {
+    		String sortedBowlingData = bowlingAnalyser.getBowlingAvgWiseMaxWicketsSortedData(Paths.get(LEAGUE_BOWLING_DATA));
+    		LeagueBatting[] bowlingList = new Gson().fromJson(sortedBowlingData, LeagueBatting[].class);
+    		Assert.assertEquals("Imran Tahir", bowlingList[0].player);
+    	}
+    	catch(LeagueException e) {}
+    }
 }
