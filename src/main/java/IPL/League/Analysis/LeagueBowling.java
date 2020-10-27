@@ -13,10 +13,11 @@ public class LeagueBowling {
 	public static double economy;
 	public static String strikeRate;
 	public static int fourWickets;
+	public static int fiveWickets;
 	
 	public LeagueBowling() {}
 	
-	public LeagueBowling(String pos, String player, int noOfMatches, int noOfInnings, double overs, int runs, int noOfWickets, int bbi, String average, double economy, String strikeRate, int fourWickets) {
+	public LeagueBowling(String pos, String player, int noOfMatches, int noOfInnings, double overs, int runs, int noOfWickets, int bbi, String average, double economy, String strikeRate, int fourWickets, int fiveWickets) {
 		this.pos = pos;
 		this.player = player;
 		this.noOfMatches = noOfMatches;
@@ -29,5 +30,6 @@ public class LeagueBowling {
 		this.economy = economy;
 		this.strikeRate = strikeRate;
 		this.fourWickets = fourWickets;
+		this.fiveWickets = fiveWickets;
 	}
 }
