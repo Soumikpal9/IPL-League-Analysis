@@ -45,4 +45,14 @@ public class BowlingAnalyserTest {
     	}
     	catch(LeagueException e) {}
     }
+    
+    @Test
+    public void givenBowlingData_ShouldReturnTopEconomy() throws LeagueException, CSVException {
+    	try {
+    		String sortedBowlingData = bowlingAnalyser.getEconomyWiseSortedData(Paths.get(LEAGUE_BOWLING_DATA));
+    		LeagueBatting[] bowlingList = new Gson().fromJson(sortedBowlingData, LeagueBatting[].class);
+    		Assert.assertEquals("Ben Cutting", bowlingList[0].player);
+    	}
+    	catch(LeagueException e) {}
+    }
 }
