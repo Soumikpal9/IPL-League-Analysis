@@ -122,4 +122,14 @@ public class BattingAnalyserTest {
     	}
     	catch(LeagueException e) {}
     }
+    
+    @Test
+    public void givenBattingData_ShouldReturnZeroCenturiesAndHalfCenturiesBattingAverages() throws LeagueException, CSVException {
+    	try {
+    		String sortedBattingData = battingAnalyser.getZeroHundredsAndFiftiesWiseSortedData(Paths.get(LEAGUE_BATTING_DATA));
+    		LeagueBatting[] battingList = new Gson().fromJson(sortedBattingData, LeagueBatting[].class);
+    		Assert.assertEquals("Marcus Stoinis", battingList[0].player);
+    	}
+    	catch(LeagueException e) {}
+    }
 }
