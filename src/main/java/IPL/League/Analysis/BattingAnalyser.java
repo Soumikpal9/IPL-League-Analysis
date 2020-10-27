@@ -16,7 +16,7 @@ import com.CSVBuilder.CSVBuilderFactory;
 import com.CSVBuilder.CSVException;
 import com.CSVBuilder.ICSVBuilder;
 
-public class LeagueAnalyser {
+public class BattingAnalyser {
 	ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
 	
     public int loadCSVFilePath(Path path) throws LeagueException, CSVException {

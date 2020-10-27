@@ -2,7 +2,7 @@ package IPL.League.Analysis;
 
 public class LeagueException extends Exception {
 	enum ExceptionType{
-		WRONG_CSV, WRONG_TYPE, WRONG_HEADER, UNABLE_TO_PARSE, NO_CENSUS_DATA;
+		WRONG_CSV, WRONG_TYPE, WRONG_HEADER, UNABLE_TO_PARSE, NO_LEAGUE_DATA;
 	}
 	
 	ExceptionType type;
