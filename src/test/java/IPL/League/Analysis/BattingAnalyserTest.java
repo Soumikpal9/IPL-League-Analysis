@@ -52,4 +52,24 @@ public class BattingAnalyserTest {
     	}
     	catch(LeagueException e) {}
     }
+    
+    @Test
+    public void givenBattingData_ShouldReturnTopSixes() throws LeagueException, CSVException {
+    	try {
+    		String sortedBattingData = battingAnalyser.getBattingAvgWiseSortedData(Paths.get(LEAGUE_BATTING_DATA));
+    		LeagueBatting[] battingList = new Gson().fromJson(sortedBattingData, LeagueBatting[].class);
+    		Assert.assertEquals("Andre Russell", battingList[0].player);
+    	}
+    	catch(LeagueException e) {}
+    }
+    
+    @Test
+    public void givenBattingData_ShouldReturnTopStrikeFours() throws LeagueException, CSVException {
+    	try {
+    		String sortedBattingData = battingAnalyser.getBattingAvgWiseSortedData(Paths.get(LEAGUE_BATTING_DATA));
+    		LeagueBatting[] battingList = new Gson().fromJson(sortedBattingData, LeagueBatting[].class);
+    		Assert.assertEquals("Shikhar Dhawan", battingList[0].player);
+    	}
+    	catch(LeagueException e) {}
+    }
 }
