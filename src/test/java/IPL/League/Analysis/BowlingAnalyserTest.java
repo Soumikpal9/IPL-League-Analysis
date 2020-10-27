@@ -55,4 +55,24 @@ public class BowlingAnalyserTest {
     	}
     	catch(LeagueException e) {}
     }
+    
+    @Test
+    public void givenBowlingData_ShouldReturnStrikeRateTopFiveWickets() throws LeagueException, CSVException {
+    	try {
+    		String sortedBowlingData = bowlingAnalyser.getFiveWicketWiseStrikeRateSortedData(Paths.get(LEAGUE_BOWLING_DATA));
+    		LeagueBatting[] bowlingList = new Gson().fromJson(sortedBowlingData, LeagueBatting[].class);
+    		Assert.assertEquals("Krishnappa Gowtham", bowlingList[0].player);
+    	}
+    	catch(LeagueException e) {}
+    }
+    
+    @Test
+    public void givenBowlingData_ShouldReturnStrikeRateTopFourWickets() throws LeagueException, CSVException {
+    	try {
+    		String sortedBowlingData = bowlingAnalyser.getFourWicketWiseStrikeRateSortedData(Paths.get(LEAGUE_BOWLING_DATA));
+    		LeagueBatting[] bowlingList = new Gson().fromJson(sortedBowlingData, LeagueBatting[].class);
+    		Assert.assertEquals("Krishnappa Gowtham", bowlingList[0].player);
+    	}
+    	catch(LeagueException e) {}
+    }
 }
