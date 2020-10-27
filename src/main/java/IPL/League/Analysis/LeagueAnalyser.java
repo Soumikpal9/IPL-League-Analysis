@@ -3,8 +3,31 @@
  */
 package IPL.League.Analysis;
 
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
+import com.CSVBuilder.CSVBuilderFactory;
+import com.CSVBuilder.CSVException;
+import com.CSVBuilder.ICSVBuilder;
+
 public class LeagueAnalyser {
-    public static void main(String[] args) {
-    	System.out.println("Welcome To IPL LEague Analysis Problem!!!");
+    public int loadCSVFilePath(Path path) throws LeagueException, CSVException {
+    	try(Reader reader = Files.newBufferedReader(path)){
+    		ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
+    		List<LeagueBatting> battingList = csvBuilder.getCSVFileList(reader, LeagueBatting.class);
+    		return battingList.size();
+    	}
+    	catch(IOException e) {
+			throw new LeagueException("File not found", LeagueException.ExceptionType.WRONG_CSV); 
+		}
+		catch(RuntimeException e) {
+			throw new LeagueException("File internal data not valid", LeagueException.ExceptionType.WRONG_HEADER);
+		}
+		catch(CSVException e) {
+			throw new LeagueException("Unable to parse", LeagueException.ExceptionType.UNABLE_TO_PARSE);
+		}
     }
 }
